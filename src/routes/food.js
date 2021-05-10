@@ -1,11 +1,29 @@
 'use strict';
 //this page will make for use the render and create the database
 
+//mongoose
+const mongoose = require('mongoose');
+
 //middleware for the modles page to base the schema in this page and the class object
 //class
 const DataCollection = require('../modles/data-collection-class.js');
 //schema
 const foodModel = require('../modles/food.js');
+
+//create URL for the database
+const MONGODB_URI = 'mongodb://localhost:127.0.0.1:27017/api-server';
+
+//route for create database
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+}).then(() => {
+    console.log('iam connect to the mongoose database');
+}).catch((error) => {
+    console.log(error);
+});
 
 //route to create new object
 const food = new DataCollection(foodModel);

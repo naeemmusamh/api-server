@@ -11,14 +11,11 @@ const notPathFound = require('./error-handlers/404.js');
 //middleware for the logger page
 const logger = require('./middleware/logger.js');
 
-//route for the food page
-const food = require('./routes/food.js');
 
 //middleware for the logger and food page
 //logger
 app.use(logger);
-//food
-// app.use(food);
+
 
 //route for the home page
 app.get('/', (request, response) => {
