@@ -4,11 +4,11 @@ we work in new functionality that make for us the test challenge and database in
 
 # the URLs for app
 
-[github](https://github.com/naeemmusamh/basic-api-server)
+[github](https://github.com/naeemmusamh/api-server)
 
-[github live](https://naeemmusamh.github.io/basic-api-server/)
+[github live](https://naeemmusamh.github.io/api-server/)
 
-[The pull repo](https://github.com/naeemmusamh/basic-api-server/pull/1)
+[The pull repo](https://github.com/naeemmusamh/api-server/pull/1)
 
 [Heroku]()
 
