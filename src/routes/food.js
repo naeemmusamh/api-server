@@ -1,69 +1,45 @@
 'use strict';
-//this page will make for use the render and create the database
 
-//mongoose
 const mongoose = require('mongoose');
 
-//middleware for the modles page to base the schema in this page and the class object
-//class
-const DataCollection = require('../modles/data-collection-class.js');
-//schema
-const foodModel = require('../modles/food.js');
+const foodCollection = require('../models/data-collection-class.js');
 
-//create URL for the database
-const MONGODB_URI = 'mongodb://localhost:127.0.0.1:27017/api-server';
+const foodModule = require('../models/food.js');
 
-//route for create database
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-}).then(() => {
-    console.log('iam connect to the mongoose database');
-}).catch((error) => {
-    console.log(error);
-});
+const Food = new foodCollection(foodModule);
 
-//route to create new object
-const food = new DataCollection(foodModel);
-
-//route for the new food
-const infoDatabase = async() => {
-
-    //create first item
-    let mansaf = {
-        name: 'mansaf',
-        price: 25,
-        type: 'MEAT'
+const foodData = async() => {
+    let foodNew = {
+        name: 'mshmsh',
+        price: 5,
+        type: 'vega'
     }
 
-    //route for create the first item
-    let newFood = await food.create(mansaf);
-    console.log('the item of food was create ==>', newFood);
+    //route to create new food
+    let newFood = await Food.create(foodNew);
+    console.log('the new food create', newFood);
 
-    //route for get all the item
-    let allFood = await food.get();
-    console.log('this is the all item ===>', allFood);
+    //route to get all the data collection
+    let allFood = await Food.get();
+    console.log('to get all the food collection', allFood);
 
-    //route for get one item
-    let oneFood = await food.get(newFood.id);
-    console.log('this is the one item ===>', oneFood);
+    //route to get one food collection
+    let oneFood = await Food.get(newFood.id);
+    console.log('to get one food collection', oneFood);
 
-    //route for update item
-    //update the last item base for the database
-    let updateFood = await food.update(newFood.id, {
-        name: 'mlokhea',
-        price: 10,
-        type: 'VEGETARIAN'
+    //route to create new food and update it
+    let updateFood = await Food.update(newFood.id, {
+        name: 'peg',
+        price: 25,
+        type: 'meat'
     });
-    console.log('the new item was update ====>', updateFood);
+    console.log('create new food and update', updateFood);
 
-    //route to get the update item
-    let updateLastFood = await food.get(newFood.id);
-    console.log('this is the last item was update ====>', updateLastFood);
+    //rote to get the update food collection
+    let getFoodUpdate = await Food.get(newFood.id);
+    console.log('to get the update food', getFoodUpdate);
 
-    let deletedFood = await food.delete(newFood.id);
-    console.log('this item was deleted ===>', deletedFood);
+    mongoose.disconnect();
 }
-infoDatabase();
+
+foodData();

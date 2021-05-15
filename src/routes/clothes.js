@@ -1,69 +1,45 @@
 'use strict';
-//this page will make for use the render and create the database
 
-//mongoose
 const mongoose = require('mongoose');
 
-//middleware for the modles page to base the schema in this page and the class object
-//class
-const DataCollection = require('../modles/data-collection-class.js');
-//schema
-const clothesModel = require('../modles/clothes.js');
+const clothesCollection = require('../models/data-collection-class.js');
 
-//create URL for the database
-const MONGODB_URI = 'mongodb://localhost:127.0.0.1:27017/api-server';
+const foodModule = require('../models/clothes.js');
 
-//route for create database
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-}).then(() => {
-    console.log('iam connect to the mongoose database');
-}).catch((error) => {
-    console.log(error);
-});
+const Clothes = new clothesCollection(foodModule);
 
-//route to create new object
-const clothes = new DataCollection(clothesModel);
-
-//route for the new clothes
-const infoDatabase = async() => {
-
-    //create first item
-    let mansaf = {
+const clothesData = async() => {
+    let clothesNew = {
         name: 'T-shirt',
-        price: 60,
-        type: 'ZARA'
+        price: 15,
+        type: 'BOSS'
     }
 
-    //route for create the first item
-    let newClothes = await clothes.create(mansaf);
-    console.log('the item of clothes was create ==>', newClothes);
+    //route to create new clothes
+    let newClothes = await Clothes.create(clothesNew);
+    console.log('to create new clothes', newClothes);
 
-    //route for get all the item
-    let allClothes = await clothes.get();
-    console.log('this is the all item ===>', allClothes);
+    //route to get all the data collection
+    let allClothes = await Clothes.get();
+    console.log('to get all the clothes collection', allClothes);
 
-    //route for get one item
-    let oneClothes = await clothes.get(newClothes.id);
-    console.log('this is the one item ===>', oneClothes);
+    //route to get one food collection
+    let oneClothes = await Clothes.get(newClothes.id);
+    console.log('to get one clothes collection', oneClothes);
 
-    //route for update item
-    //update the last item base for the database
-    let updateClothes = await clothes.update(newClothes.id, {
-        name: 'mlokhea',
-        price: 10,
-        type: 'VEGETARIAN'
+    //route to create new food and update it
+    let updateClothes = await Clothes.update(newClothes.id, {
+        name: 'sweeter',
+        price: 35,
+        type: 'ZARA'
     });
-    console.log('the new item was update ====>', updateClothes);
+    console.log('create new food and update', updateClothes);
 
-    //route to get the update item
-    let updateLastClothes = await clothes.get(newClothes.id);
-    console.log('this is the last item was update ====>', updateLastClothes);
+    //rote to get the update food collection
+    let getClothesUpdate = await Clothes.get(newClothes.id);
+    console.log('to get the update food', getClothesUpdate);
 
-    let deletedClothes = await clothes.delete(newClothes.id);
-    console.log('this item was deleted ===>', deletedClothes);
+    mongoose.disconnect();
 }
-infoDatabase();
+
+clothesData();

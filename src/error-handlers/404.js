@@ -1,10 +1,9 @@
 'use strict';
-//this page to render for use Error if the error from the path is not exist
+//this page for display error when the path is not exist
 
-//middleware and the function for the 404 error
 module.exports = (request, response, next) => {
     response.status(404).json({
-        message: message,
+        message: 'there is path is not exist',
         path: request.baseUrl
     });
 };
