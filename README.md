@@ -8,7 +8,7 @@ we work in new functionality that make for us the test challenge and database in
 
 [github live](https://naeemmusamh.github.io/api-server/)
 
-[The pull repo](https://github.com/naeemmusamh/api-server/pull/2)
+[The pull repo](https://github.com/naeemmusamh/api-server/pull/3)
 
 [Heroku]()
 
